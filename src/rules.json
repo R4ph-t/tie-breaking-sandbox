@@ -1,0 +1,19 @@
+{
+  "lego": [
+    {
+      "description": "This criterion is sorting against colors: red, blue, white",
+      "attribute": "color",
+      "sorting": ["red", "blue", "white"]
+    },
+    {
+      "description": "This criterion is sorting against hits shapes, rectangle or round",
+      "attribute": "shape",
+      "sorting": ["rectancle", "round"]
+    },
+    {
+      "description": "This criterion is sorting against number of studs",
+      "attribute": "studs",
+      "sorting": [-1]
+    }
+  ]
+}

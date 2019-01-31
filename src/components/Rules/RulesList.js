@@ -6,11 +6,11 @@ class RulesListComp extends React.Component {
   render() {
     return (
       <div>
-        {this.props.items.map((e, index) => (
+        {this.props.items.map((item, index) => (
           <RuleElement
             key={`item-${index}`}
             index={index}
-            text={e}
+            {...item}
             onSortEnd={this.onSortEnd}
           />
         ))}

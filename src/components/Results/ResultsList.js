@@ -6,8 +6,14 @@ class ResultsListComp extends React.Component {
   render() {
     return (
       <div className="results-container">
-        <ResultElement />
-        <ResultElement />
+        {this.props.items.map((item, index) => (
+          <ResultElement
+            key={`item-${index}`}
+            index={index}
+            {...item}
+            onSortEnd={this.onSortEnd}
+          />
+        ))}
       </div>
     );
   }

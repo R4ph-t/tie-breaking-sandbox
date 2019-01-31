@@ -1,0 +1,56 @@
+[
+  {
+    "img": "4_red_rect.png",
+    "color": "red",
+    "studs": "4",
+    "shape": "0"
+  },
+  {
+    "img": "4_white_rect.png",
+    "color": "white",
+    "studs": "4",
+    "shape": "1"
+  },
+  {
+    "img": "4_blue_rect.png",
+    "color": "blue",
+    "studs": "4",
+    "shape": "0"
+  },
+  {
+    "img": "4_red_round.png",
+    "color": "red",
+    "studs": "4",
+    "shape": "1"
+  },
+  {
+    "img": "4_white_round.png",
+    "color": "white",
+    "studs": "4",
+    "shape": "1"
+  },
+  {
+    "img": "4_blue_round.png",
+    "color": "blue",
+    "studs": "4",
+    "shape": "1"
+  },
+  {
+    "img": "8_red_rect.png",
+    "color": "red",
+    "studs": "8",
+    "shape": "0"
+  },
+  {
+    "img": "8_white_rect.png",
+    "color": "white",
+    "studs": "8",
+    "shape": "0"
+  },
+  {
+    "img": "8_blue_rect.png",
+    "color": "blue",
+    "studs": "8",
+    "shape": "0"
+  }
+]
