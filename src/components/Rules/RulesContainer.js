@@ -17,7 +17,11 @@ class RulesContainer extends React.Component {
         this.props.rulesUpdatedFromDrag(this.state.items);
       }
     );
-    //this.props.rulesUpdatedFromDrag(this.state.items);
+  };
+
+  updateSortingOrder = ruleToUpdate => {
+    console.log(ruleToUpdate);
+    this.props.updateSortingOrder(ruleToUpdate);
   };
 
   shouldCancel = () => {
@@ -32,6 +36,8 @@ class RulesContainer extends React.Component {
           items={this.state.items}
           shouldCancelStart={this.shouldCancel}
           onSortEnd={this.onSortEnd}
+          distance={2}
+          updateSortingOrder={this.updateSortingOrder}
         />
       </div>
     );

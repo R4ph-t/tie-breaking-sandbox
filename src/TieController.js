@@ -45,15 +45,11 @@ class TieController extends React.Component {
 
   // rules ordered modified by user
   rulesUpdatedFromDrag = newRules => {
-    console.log("rules updated from drag");
-    console.log(this.state.rules[0]);
-    console.log(newRules[0]);
     this.setState(
       () => ({
         rules: newRules
       }),
       () => {
-        console.log(this.state.rules[0]);
         this.updateResults(this.state.rules);
       }
     );
@@ -78,18 +74,24 @@ class TieController extends React.Component {
     if (rulesQueue.length > 0) {
       this.applySortingForRule(rulesQueue.pop());
     }
-    //_.reverse(newRules).forEach(rule => this.applySortingForRule(rule));
   };
 
   // sort by one rule
   applySortingForRule = rule => {
     let currentResultsSorting = this.state.results;
     // console.log(rule);
-    //this is only ascending
-    const newSorting = currentResultsSorting.sort((a, b) => {
-      return a[rule.attribute] - b[rule.attribute];
-    });
-    //console.log(newSorting);
+    // this is only ascending
+    let newSorting = [];
+    if (rule.isAsc) {
+      newSorting = currentResultsSorting.sort((a, b) => {
+        return a[rule.attribute] - b[rule.attribute];
+      });
+    } else {
+      newSorting = currentResultsSorting.sort((a, b) => {
+        return b[rule.attribute] - a[rule.attribute];
+      });
+    }
+
     this.setState(
       () => ({
         results: newSorting
@@ -103,8 +105,26 @@ class TieController extends React.Component {
     );
   };
 
+  updateSortingOrder = ruleToUpdate => {
+    const rules = this.state.rules;
+    rules.filter(elem => {
+      if (elem.attribute === ruleToUpdate.attribute) {
+        elem.isAsc = ruleToUpdate.isAsc;
+        return true;
+      } else {
+        return false;
+      }
+    });
+    this.setState(
+      () => ({ rules: rules }),
+      () => {
+        console.log(this.state.rules);
+        this.updateResults(this.state.rules);
+      }
+    );
+  };
+
   render() {
-    // console.log(rules);
     const resultsToshow = this.state.results || [];
     const rulesToshow = this.state.rules || [];
 
@@ -114,8 +134,10 @@ class TieController extends React.Component {
           <RulesContainer
             rules={rulesToshow}
             updateRules={this.updateRules}
+            updateSortingOrder={this.updateSortingOrder}
             rulesUpdatedFromDrag={e => this.rulesUpdatedFromDrag(e)}
             isDraggable={true}
+            useDragHandle
           />
           <ResultsContainer
             results={resultsToshow}

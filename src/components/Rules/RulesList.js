@@ -3,6 +3,10 @@ import RuleElement from "./RuleElement";
 import { SortableContainer } from "react-sortable-hoc";
 
 class RulesListComp extends React.Component {
+  updateSortingOrder = ruleToUpdate => {
+    this.props.updateSortingOrder(ruleToUpdate);
+  };
+
   render() {
     return (
       <div>
@@ -12,6 +16,7 @@ class RulesListComp extends React.Component {
             index={index}
             {...item}
             onSortEnd={this.onSortEnd}
+            updateSortingOrder={this.updateSortingOrder}
           />
         ))}
       </div>
