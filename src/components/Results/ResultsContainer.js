@@ -9,6 +9,7 @@ class ResultContainer extends React.Component {
   state = {
     items: this.props.results
   };
+
   onSortEnd = ({ oldIndex, newIndex }) => {
     this.setState(
       ({ items }) => ({
@@ -23,7 +24,9 @@ class ResultContainer extends React.Component {
   shouldCancel = () => {
     return !this.props.isDraggable;
   };
+
   render() {
+    const resultsToshow = this.state.items || [];
     return (
       <ResultsList
         items={this.props.results}

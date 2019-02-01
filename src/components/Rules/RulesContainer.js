@@ -5,18 +5,25 @@ import "../../styles/rules.scss";
 
 class RulesContainer extends React.Component {
   state = {
-    items: this.props.rules.lego
+    items: this.props.rules
   };
 
   onSortEnd = ({ oldIndex, newIndex }) => {
-    this.setState(({ items }) => ({
-      items: arrayMove(items, oldIndex, newIndex)
-    }));
-    this.props.rulesUpdatedFromDrag(this.state.items);
+    this.setState(
+      ({ items }) => ({
+        items: arrayMove(items, oldIndex, newIndex)
+      }),
+      () => {
+        this.props.rulesUpdatedFromDrag(this.state.items);
+      }
+    );
+    //this.props.rulesUpdatedFromDrag(this.state.items);
   };
+
   shouldCancel = () => {
     return !this.props.isDraggable;
   };
+
   render() {
     // console.log(this.state);
     return (

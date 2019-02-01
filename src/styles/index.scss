@@ -1,5 +1,12 @@
+body {
+  font-family: Verdana, sans-serif;
+}
+
+h1 {
+  text-align: center;
+}
+
 .main-container {
-  font-family: sans-serif;
   display: flex;
   flex-direction: row;
 }

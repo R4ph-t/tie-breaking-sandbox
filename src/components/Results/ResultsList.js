@@ -10,6 +10,7 @@ class ResultsListComp extends React.Component {
           <ResultElement
             key={`item-${index}`}
             index={index}
+            position={index + 1}
             {...item}
             onSortEnd={this.onSortEnd}
           />

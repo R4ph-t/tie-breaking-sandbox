@@ -1,10 +1,11 @@
 import React from "react";
 import { SortableElement } from "react-sortable-hoc";
 
-export const ResultElementComp = props => {
-  const { img } = { ...props };
+const ResultElementComp = props => {
+  const { img, position } = { ...props };
   return (
     <div className="result-element">
+      <span className="position">{position}</span>
       <img className="lego" src={`assets/bricks/${img}`} />
     </div>
   );
@@ -13,4 +14,3 @@ export const ResultElementComp = props => {
 const ResultElement = SortableElement(ResultElementComp);
 
 export default ResultElement;
-//
