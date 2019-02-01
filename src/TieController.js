@@ -2,29 +2,18 @@ import React from "react";
 import _ from "lodash";
 import RulesContainer from "./components/Rules/RulesContainer";
 import ResultsContainer from "./components/Results/ResultsContainer";
-import rules from "./rules.json";
-import legos from "./legos.json";
+import config from "./config.json";
 
 const resultCount = 9;
-const attributeMapping = {
-  color: {
-    red: 0,
-    blue: 1,
-    white: 2
-  },
-  shape: {
-    rect: 0,
-    round: 1
-  }
-};
-
-const rulesQueue = [];
+let rulesQueue = [];
+const configLegos = config.lego;
+const legos = configLegos.dataset;
 
 class TieController extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      rules: rules.lego,
+      rules: configLegos.criterias,
       resultCount,
       results: this.getNewSet(resultCount)
     };
@@ -33,13 +22,13 @@ class TieController extends React.Component {
   buildAHit = data => {
     //map readable attributes to ints
     const newObj = Object.assign({}, data);
-    Object.keys(attributeMapping).forEach(key => {
-      newObj[key] = attributeMapping[key][data[key]];
+    Object.keys(configLegos.attributeMapping).forEach(key => {
+      newObj[key] = configLegos.attributeMapping[key][data[key]];
     });
     return newObj;
   };
 
-  getNewSet = count => {
+  getNewSet = () => {
     // TODO: at least one of each color
     const tmpResultArr = [];
     for (let i = 0; i < resultCount; i++) {
@@ -59,12 +48,8 @@ class TieController extends React.Component {
     console.log("rules updated from drag");
     console.log(this.state.rules[0]);
     console.log(newRules[0]);
-    /*this.setState({ rules: rules }, () => {
-      // this.updateResults(rules);
-      console.log(this.state.rules[0]);
-    });*/
     this.setState(
-      state => ({
+      () => ({
         rules: newRules
       }),
       () => {
@@ -89,7 +74,10 @@ class TieController extends React.Component {
 
   // update results after Rule changed
   updateResults = newRules => {
-    this.applySortingForRule(newRules[0]);
+    rulesQueue = newRules.slice();
+    if (rulesQueue.length > 0) {
+      this.applySortingForRule(rulesQueue.pop());
+    }
     //_.reverse(newRules).forEach(rule => this.applySortingForRule(rule));
   };
 
@@ -102,9 +90,17 @@ class TieController extends React.Component {
       return a[rule.attribute] - b[rule.attribute];
     });
     //console.log(newSorting);
-    this.setState(state => ({
-      results: newSorting
-    }));
+    this.setState(
+      () => ({
+        results: newSorting
+      }),
+      () => {
+        if (rulesQueue.length > 0) {
+          const aRule = rulesQueue.pop();
+          this.applySortingForRule(aRule);
+        }
+      }
+    );
   };
 
   render() {

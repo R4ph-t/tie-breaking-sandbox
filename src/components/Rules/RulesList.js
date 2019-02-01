@@ -4,7 +4,6 @@ import { SortableContainer } from "react-sortable-hoc";
 
 class RulesListComp extends React.Component {
   render() {
-    console.log(this.props.items);
     return (
       <div>
         {this.props.items.map((item, index) => (

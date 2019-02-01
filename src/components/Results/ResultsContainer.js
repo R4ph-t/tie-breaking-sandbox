@@ -1,5 +1,4 @@
 import React from "react";
-import ResultElement from "./ResultElement";
 import ResultsList from "./ResultsList";
 import { arrayMove } from "react-sortable-hoc";
 
@@ -26,7 +25,6 @@ class ResultContainer extends React.Component {
   };
 
   render() {
-    const resultsToshow = this.state.items || [];
     return (
       <ResultsList
         items={this.props.results}
