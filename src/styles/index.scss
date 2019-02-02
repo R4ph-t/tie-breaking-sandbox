@@ -1,12 +1,47 @@
+@import "./_variables.scss";
+
 body {
-  font-family: Verdana, sans-serif;
+  font-family: Helvetica, sans-serif;
+  margin: 20px;
 }
 
 h1 {
   text-align: center;
+  color: $color-solstice;
 }
 
 .main-container {
   display: flex;
   flex-direction: row;
+}
+.button-default {
+  margin: 5px;
+  cursor: pointer;
+  outline: none;
+  font-weight: 600;
+  font-size: 0.9em;
+  min-height: 30px;
+  min-width: 80px;
+  padding: 6px 10px;
+  background-color: $color-nova;
+  color: white;
+  border-radius: 5px;
+  border: none;
+  &:hover {
+    background-color: $color-proton;
+  }
+}
+.button-success {
+  @extend .button-default;
+  background-color: $color-jupiter-1;
+  &:hover {
+    background-color: $color-jupiter-2;
+  }
+}
+.button-danger {
+  @extend .button-default;
+  background-color: $color-mars-1;
+  &:hover {
+    background-color: $color-mars-2;
+  }
 }

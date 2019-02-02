@@ -1,5 +1,6 @@
 import React from "react";
 import _ from "lodash";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import RulesContainer from "./components/Rules/RulesContainer";
 import ResultsContainer from "./components/Results/ResultsContainer";
 import config from "./config.json";
@@ -79,8 +80,6 @@ class TieController extends React.Component {
   // sort by one rule
   applySortingForRule = rule => {
     let currentResultsSorting = this.state.results;
-    // console.log(rule);
-    // this is only ascending
     let newSorting = [];
     if (rule.isAsc) {
       newSorting = currentResultsSorting.sort((a, b) => {
@@ -98,6 +97,8 @@ class TieController extends React.Component {
       }),
       () => {
         if (rulesQueue.length > 0) {
+          console.log(this.state.rules);
+
           const aRule = rulesQueue.pop();
           this.applySortingForRule(aRule);
         }
@@ -130,6 +131,14 @@ class TieController extends React.Component {
 
     return (
       <div>
+        <div>
+          <button className="button-danger" onClick={this.setNewSet}>
+            NewSet <FontAwesomeIcon icon="plus-circle" />
+          </button>
+          <button className="button-success" onClick={this.updateSortingOrder}>
+            Apply Sorting <FontAwesomeIcon icon="check-square" />
+          </button>
+        </div>
         <div className="main-container">
           <RulesContainer
             rules={rulesToshow}
@@ -137,7 +146,6 @@ class TieController extends React.Component {
             updateSortingOrder={this.updateSortingOrder}
             rulesUpdatedFromDrag={e => this.rulesUpdatedFromDrag(e)}
             isDraggable={true}
-            useDragHandle
           />
           <ResultsContainer
             results={resultsToshow}
@@ -145,9 +153,6 @@ class TieController extends React.Component {
             resultsUpdatedFromDrag={e => this.resultsUpdatedFromDrag(e)}
             isDraggable={false}
           />
-        </div>
-        <div>
-          <button onClick={this.setNewSet}>NewSet</button>
         </div>
       </div>
     );

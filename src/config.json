@@ -17,19 +17,28 @@
         "description": "This criterion is sorting against colors: red, blue, white",
         "attribute": "color",
         "isAsc": true,
-        "sorting": ["red", "blue", "white"]
+        "sorting": {
+          "asc": ["red", "blue", "white"],
+          "desc": ["white", "blue", "red"]
+        }
       },
       {
         "description": "This criterion is sorting against hits shapes: rectangle or round",
         "attribute": "shape",
         "isAsc": true,
-        "sorting": ["rectancle", "round"]
+        "sorting": {
+          "asc": ["rectancle", "round"],
+          "desc": ["round", "rectancle"]
+        }
       },
       {
         "description": "This criterion is sorting against number of studs: 4 or 8",
         "attribute": "studs",
         "isAsc": true,
-        "sorting": ["asc"]
+        "sorting": {
+          "asc": ["asc"],
+          "desc": ["desc"]
+        }
       }
     ],
     "attributeMapping": {},
@@ -41,19 +50,28 @@
         "description": "This criterion is sorting against colors: red, blue, white",
         "attribute": "color",
         "isAsc": true,
-        "sorting": ["red", "blue", "white"]
+        "sorting": {
+          "asc": ["red", "blue", "white"],
+          "desc": ["white", "blue", "red"]
+        }
       },
       {
         "description": "This criterion is sorting against hits shapes: rectangle or round",
         "attribute": "shape",
         "isAsc": true,
-        "sorting": ["rectancle", "round"]
+        "sorting": {
+          "asc": ["rectancle", "round"],
+          "desc": ["round", "rectancle"]
+        }
       },
       {
         "description": "This criterion is sorting against number of studs: 4 or 8",
         "attribute": "studs",
         "isAsc": true,
-        "sorting": ["asc"]
+        "sorting": {
+          "asc": ["asc"],
+          "desc": ["desc"]
+        }
       }
     ],
     "attributeMapping": {

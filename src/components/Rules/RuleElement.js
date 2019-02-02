@@ -1,40 +1,61 @@
 import React from "react";
 import { SortableElement } from "react-sortable-hoc";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 class RulesElementComp extends React.Component {
-  state = {};
+  constructor(props) {
+    super(props);
+    this.state = {
+      isAsc: props.isAsc
+    };
+  }
 
   formatOrdering = () => {
+    console.log(this.props.isAsc);
+    console.log(this.state.isAsc);
+
     let ordering = "";
-    if (this.props.sorting[0] === -1) {
-      ordering = "ascending";
-    } else if (this.props.sorting[0] === 1) {
-      ordering = "descending";
-    } else {
-      for (let attr of this.props.sorting) {
-        ordering += `${attr} > `;
-      }
-      ordering = ordering.substring(0, ordering.length - 3);
-    }
+    const sorting = this.props.sorting[this.props.isAsc ? "asc" : "desc"];
+    ordering = sorting.map((attr, index) => {
+      const sign =
+        index < sorting.length - 1 ? (
+          <FontAwesomeIcon icon="chevron-circle-right" />
+        ) : (
+          ""
+        );
+      return (
+        <span key={`sort-attr-${index}`}>
+          {attr} {sign}{" "}
+        </span>
+      );
+    });
     return ordering;
   };
 
   updateSortingOrder = () => {
-    console.log(this.props);
-
-    this.props.updateSortingOrder({
-      attribute: this.props.attribute,
-      isAsc: !this.props.isAsc
-    });
+    this.setState(
+      () => ({ isAsc: !this.props.isAsc }),
+      () => {
+        this.props.updateSortingOrder({
+          attribute: this.props.attribute,
+          isAsc: this.state.isAsc
+        });
+      }
+    );
   };
 
   render() {
     return (
       <div className="rule-element">
-        <h4>{this.props.attribute}</h4>
-        <div>
-          <button onClick={this.updateSortingOrder}>
-            {this.formatOrdering()}>
+        <div className="rule-title">
+          <h4>{this.props.attribute}</h4>
+        </div>
+        <div className="rule-sorting-btn-container">
+          <button
+            className="button-default rule-sorting-btn"
+            onClick={this.updateSortingOrder}
+          >
+            {this.formatOrdering()}
           </button>
         </div>
       </div>
