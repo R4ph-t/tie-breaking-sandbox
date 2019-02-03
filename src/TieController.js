@@ -5,7 +5,7 @@ import RulesContainer from "./components/Rules/RulesContainer";
 import ResultsContainer from "./components/Results/ResultsContainer";
 import config from "./config.json";
 
-const resultCount = 9;
+const resultCount = 50;
 let rulesQueue = [];
 const configLegos = config.lego;
 const legos = configLegos.dataset;
@@ -131,13 +131,21 @@ class TieController extends React.Component {
 
     return (
       <div>
-        <div>
-          <button className="button-danger" onClick={this.setNewSet}>
-            NewSet <FontAwesomeIcon icon="plus-circle" />
-          </button>
-          <button className="button-success" onClick={this.updateSortingOrder}>
-            Apply Sorting <FontAwesomeIcon icon="check-square" />
-          </button>
+        <div className="nav-bar-container">
+          <nav className="nav-bar">
+            <div className="nav-bar-title">Tie-Breaking Sandbox</div>
+            <div className="nav-bar-btns">
+              <button className="button-danger" onClick={this.setNewSet}>
+                NewSet <FontAwesomeIcon icon="plus-circle" />
+              </button>
+              <button
+                className="button-success"
+                onClick={this.updateSortingOrder}
+              >
+                Apply Sorting <FontAwesomeIcon icon="check-square" />
+              </button>
+            </div>
+          </nav>
         </div>
         <div className="main-container">
           <RulesContainer
@@ -148,6 +156,7 @@ class TieController extends React.Component {
             isDraggable={true}
           />
           <ResultsContainer
+            axis={"xy"}
             results={resultsToshow}
             updateResults={this.updateResults}
             resultsUpdatedFromDrag={e => this.resultsUpdatedFromDrag(e)}

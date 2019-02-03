@@ -14,7 +14,6 @@ function App() {
 
   return (
     <div>
-      <h1>Tie-Breaking Sandbox</h1>
       <TieController />
     </div>
   );
