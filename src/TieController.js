@@ -29,15 +29,23 @@ class TieController extends React.Component {
     return newObj;
   };
 
-  getNewSet = () => {
-    // TODO: at least one of each color
+  buildAllHits = data => {
     const tmpResultArr = [];
-    for (let i = 0; i < resultCount; i++) {
+    for (let obj of data) {
+      const hit = this.buildAHit(obj);
+      tmpResultArr.push(hit);
+    }
+    return tmpResultArr;
+  };
+
+  getNewSet = () => {
+    const tmpResultArr = this.buildAllHits(legos);
+    for (let i = 0; i < resultCount - legos.length; i++) {
       const randLegoIdx = _.random(0, legos.length - 1);
       const hitData = legos[randLegoIdx];
       tmpResultArr.push(this.buildAHit(hitData));
     }
-    return tmpResultArr;
+    return _.shuffle(tmpResultArr);
   };
 
   setNewSet = () => {

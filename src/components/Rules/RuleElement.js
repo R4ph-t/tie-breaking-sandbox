@@ -14,22 +14,17 @@ class RulesElementComp extends React.Component {
     console.log(this.props.isAsc);
     console.log(this.state.isAsc);
 
-    let ordering = "";
     const sorting = this.props.sorting[this.props.isAsc ? "asc" : "desc"];
-    ordering = sorting.map((attr, index) => {
-      const sign =
-        index < sorting.length - 1 ? (
-          <FontAwesomeIcon icon="chevron-circle-right" />
-        ) : (
-          ""
-        );
-      return (
+    
+    return sorting.map((attr, index) => 
         <span key={`sort-attr-${index}`}>
-          {attr} {sign}{" "}
+          {attr}{" "} 
+          {index < sorting.length - 1 && (
+            <FontAwesomeIcon icon="chevron-circle-right" />
+          )}
+          {" "}
         </span>
       );
-    });
-    return ordering;
   };
 
   updateSortingOrder = () => {
