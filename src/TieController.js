@@ -55,9 +55,7 @@ class TieController extends React.Component {
   // rules ordered modified by user
   rulesUpdatedFromDrag = newRules => {
     this.setState(
-      () => ({
-        rules: newRules
-      }),
+      { rules: newRules },
       () => {
         this.updateResults(this.state.rules);
       }
@@ -100,9 +98,7 @@ class TieController extends React.Component {
     }
 
     this.setState(
-      () => ({
-        results: newSorting
-      }),
+      { results: newSorting },
       () => {
         if (rulesQueue.length > 0) {
           console.log(this.state.rules);
@@ -125,7 +121,7 @@ class TieController extends React.Component {
       }
     });
     this.setState(
-      () => ({ rules: rules }),
+      { rules: rules },
       () => {
         console.log(this.state.rules);
         this.updateResults(this.state.rules);

@@ -10,9 +10,7 @@ class RulesContainer extends React.Component {
 
   onSortEnd = ({ oldIndex, newIndex }) => {
     this.setState(
-      ({ items }) => ({
-        items: arrayMove(items, oldIndex, newIndex)
-      }),
+      { items: arrayMove(this.state.items, oldIndex, newIndex) },
       () => {
         this.props.rulesUpdatedFromDrag(this.state.items);
       }
