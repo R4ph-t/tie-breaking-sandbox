@@ -18,7 +18,6 @@ class RulesContainer extends React.Component {
   };
 
   updateSortingOrder = ruleToUpdate => {
-    console.log(ruleToUpdate);
     this.props.updateSortingOrder(ruleToUpdate);
   };
 
@@ -27,7 +26,6 @@ class RulesContainer extends React.Component {
   };
 
   render() {
-    console.log(this.state);
     return (
       <div className="rules-container">
         <RulesList

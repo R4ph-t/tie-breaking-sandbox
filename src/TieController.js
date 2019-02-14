@@ -68,8 +68,6 @@ class TieController extends React.Component {
 
   // in game mode result order modified by player
   resultsUpdatedFromDrag = results => {
-    console.log(this.state.results[0]);
-    console.log(results[0]);
     this.setState({ results: results }, () => {
       //console.log(this.state.results[0]);
     });
@@ -101,8 +99,6 @@ class TieController extends React.Component {
       { results: newSorting },
       () => {
         if (rulesQueue.length > 0) {
-          console.log(this.state.rules);
-
           const aRule = rulesQueue.pop();
           this.applySortingForRule(aRule);
         }
@@ -123,7 +119,6 @@ class TieController extends React.Component {
     this.setState(
       { rules: rules },
       () => {
-        console.log(this.state.rules);
         this.updateResults(this.state.rules);
       }
     );

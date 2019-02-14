@@ -11,9 +11,6 @@ class RulesElementComp extends React.Component {
   }
 
   formatOrdering = () => {
-    console.log(this.props.isAsc);
-    console.log(this.state.isAsc);
-
     const sorting = this.props.sorting[this.props.isAsc ? "asc" : "desc"];
     
     return sorting.map((attr, index) => 
