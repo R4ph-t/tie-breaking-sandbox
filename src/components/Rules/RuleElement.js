@@ -9,10 +9,10 @@ class RulesElementComp extends React.Component {
 
   formatOrdering = () => {
     const sorting = this.props.sorting[this.props.isAsc ? "asc" : "desc"];
-    
-    return sorting.map((attr, index) => 
+
+    return sorting.map((attr, index) =>
       <span key={`sort-attr-${index}`}>
-        {attr}{" "} 
+        {attr}{" "}
         {index < sorting.length - 1 && (
           <FontAwesomeIcon icon="chevron-circle-right" />
         )}
