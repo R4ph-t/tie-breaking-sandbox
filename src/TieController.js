@@ -6,7 +6,6 @@ import ResultsContainer from "./components/Results/ResultsContainer";
 import config from "./config.json";
 
 const resultCount = 50;
-let rulesQueue = [];
 const configLegos = config.lego;
 const legos = configLegos.dataset;
 
@@ -18,6 +17,8 @@ class TieController extends React.Component {
       resultCount,
       results: this.getNewSet(resultCount)
     };
+
+    this.rulesQueue = [];
   }
 
   buildAHit = data => {
@@ -75,9 +76,9 @@ class TieController extends React.Component {
 
   // update results after Rule changed
   updateResults = newRules => {
-    rulesQueue = newRules.slice();
-    if (rulesQueue.length > 0) {
-      this.applySortingForRule(rulesQueue.pop());
+    this.rulesQueue = newRules.slice();
+    if (this.rulesQueue.length > 0) {
+      this.applySortingForRule(this.rulesQueue.pop());
     }
   };
 
@@ -98,8 +99,8 @@ class TieController extends React.Component {
     this.setState(
       { results: newSorting },
       () => {
-        if (rulesQueue.length > 0) {
-          const aRule = rulesQueue.pop();
+        if (this.rulesQueue.length > 0) {
+          const aRule = this.rulesQueue.pop();
           this.applySortingForRule(aRule);
         }
       }
