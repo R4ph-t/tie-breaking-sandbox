@@ -151,14 +151,14 @@ class TieController extends React.Component {
             rules={rulesToshow}
             updateRules={this.updateRules}
             updateSortingOrder={this.updateSortingOrder}
-            rulesUpdatedFromDrag={e => this.rulesUpdatedFromDrag(e)}
+            rulesUpdatedFromDrag={this.rulesUpdatedFromDrag}
             isDraggable={true}
           />
           <ResultsContainer
             axis={"xy"}
             results={resultsToshow}
             updateResults={this.updateResults}
-            resultsUpdatedFromDrag={e => this.resultsUpdatedFromDrag(e)}
+            resultsUpdatedFromDrag={this.resultsUpdatedFromDrag}
             isDraggable={false}
           />
         </div>

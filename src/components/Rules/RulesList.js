@@ -15,7 +15,6 @@ class RulesListComp extends React.Component {
             key={`item-${index}`}
             index={index}
             {...item}
-            onSortEnd={this.onSortEnd}
             updateSortingOrder={this.updateSortingOrder}
           />
         ))}

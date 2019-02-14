@@ -3,30 +3,27 @@ import { SortableElement } from "react-sortable-hoc";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 class RulesElementComp extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      isAsc: props.isAsc
-    };
-  }
+  state = {
+    isAsc: this.props.isAsc
+  };
 
   formatOrdering = () => {
     const sorting = this.props.sorting[this.props.isAsc ? "asc" : "desc"];
     
     return sorting.map((attr, index) => 
-        <span key={`sort-attr-${index}`}>
-          {attr}{" "} 
-          {index < sorting.length - 1 && (
-            <FontAwesomeIcon icon="chevron-circle-right" />
-          )}
-          {" "}
-        </span>
-      );
+      <span key={`sort-attr-${index}`}>
+        {attr}{" "} 
+        {index < sorting.length - 1 && (
+          <FontAwesomeIcon icon="chevron-circle-right" />
+        )}
+        {" "}
+      </span>
+    );
   };
 
   updateSortingOrder = () => {
     this.setState(
-      () => ({ isAsc: !this.props.isAsc }),
+      { isAsc: !this.props.isAsc },
       () => {
         this.props.updateSortingOrder({
           attribute: this.props.attribute,
