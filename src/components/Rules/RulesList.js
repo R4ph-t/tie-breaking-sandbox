@@ -8,7 +8,6 @@ class RulesListComp extends React.Component {
   };
 
   render() {
-    console.log(this.props.items);
     return (
       <div>
         {this.props.items.map((item, index) => (
@@ -16,7 +15,6 @@ class RulesListComp extends React.Component {
             key={`item-${index}`}
             index={index}
             {...item}
-            onSortEnd={this.onSortEnd}
             updateSortingOrder={this.updateSortingOrder}
           />
         ))}

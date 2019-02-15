@@ -6,7 +6,6 @@ import ResultsContainer from "./components/Results/ResultsContainer";
 import config from "./config.json";
 
 const resultCount = 50;
-let rulesQueue = [];
 const configLegos = config.lego;
 const legos = configLegos.dataset;
 
@@ -18,6 +17,8 @@ class TieController extends React.Component {
       resultCount,
       results: this.getNewSet(resultCount)
     };
+
+    this.rulesQueue = [];
   }
 
   buildAHit = data => {
@@ -55,9 +56,7 @@ class TieController extends React.Component {
   // rules ordered modified by user
   rulesUpdatedFromDrag = newRules => {
     this.setState(
-      () => ({
-        rules: newRules
-      }),
+      { rules: newRules },
       () => {
         this.updateResults(this.state.rules);
       }
@@ -70,8 +69,6 @@ class TieController extends React.Component {
 
   // in game mode result order modified by player
   resultsUpdatedFromDrag = results => {
-    console.log(this.state.results[0]);
-    console.log(results[0]);
     this.setState({ results: results }, () => {
       //console.log(this.state.results[0]);
     });
@@ -79,9 +76,9 @@ class TieController extends React.Component {
 
   // update results after Rule changed
   updateResults = newRules => {
-    rulesQueue = newRules.slice();
-    if (rulesQueue.length > 0) {
-      this.applySortingForRule(rulesQueue.pop());
+    this.rulesQueue = newRules.slice();
+    if (this.rulesQueue.length > 0) {
+      this.applySortingForRule(this.rulesQueue.pop());
     }
   };
 
@@ -100,14 +97,10 @@ class TieController extends React.Component {
     }
 
     this.setState(
-      () => ({
-        results: newSorting
-      }),
+      { results: newSorting },
       () => {
-        if (rulesQueue.length > 0) {
-          console.log(this.state.rules);
-
-          const aRule = rulesQueue.pop();
+        if (this.rulesQueue.length > 0) {
+          const aRule = this.rulesQueue.pop();
           this.applySortingForRule(aRule);
         }
       }
@@ -125,9 +118,8 @@ class TieController extends React.Component {
       }
     });
     this.setState(
-      () => ({ rules: rules }),
+      { rules: rules },
       () => {
-        console.log(this.state.rules);
         this.updateResults(this.state.rules);
       }
     );
@@ -160,14 +152,14 @@ class TieController extends React.Component {
             rules={rulesToshow}
             updateRules={this.updateRules}
             updateSortingOrder={this.updateSortingOrder}
-            rulesUpdatedFromDrag={e => this.rulesUpdatedFromDrag(e)}
+            rulesUpdatedFromDrag={this.rulesUpdatedFromDrag}
             isDraggable={true}
           />
           <ResultsContainer
             axis={"xy"}
             results={resultsToshow}
             updateResults={this.updateResults}
-            resultsUpdatedFromDrag={e => this.resultsUpdatedFromDrag(e)}
+            resultsUpdatedFromDrag={this.resultsUpdatedFromDrag}
             isDraggable={false}
           />
         </div>
